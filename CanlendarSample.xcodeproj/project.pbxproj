@@ -27,6 +27,7 @@
 		1C38EAF022575DFF000B35AB /* TestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C38EAEF22575DFF000B35AB /* TestNavigationController.swift */; };
 		1C38EAF4225B0EBC000B35AB /* CalendarWeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C38EAF3225B0EBC000B35AB /* CalendarWeekdayView.swift */; };
 		1C38EAF6225B0ED0000B35AB /* CalendarWeekdayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C38EAF5225B0ED0000B35AB /* CalendarWeekdayView.xib */; };
+		1C38EAF8225B58C7000B35AB /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C38EAF7225B58C7000B35AB /* LaunchViewController.swift */; };
 		1C499258224A2B650088C699 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C499257224A2B650088C699 /* UIViewExtension.swift */; };
 		1CD04A5622363F08000AAEB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD04A5522363F08000AAEB5 /* AppDelegate.swift */; };
 		1CD04A5E22363F08000AAEB5 /* CanlendarSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CD04A5C22363F08000AAEB5 /* CanlendarSample.xcdatamodeld */; };
@@ -61,6 +62,7 @@
 		1C38EAEF22575DFF000B35AB /* TestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNavigationController.swift; sourceTree = "<group>"; };
 		1C38EAF3225B0EBC000B35AB /* CalendarWeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekdayView.swift; sourceTree = "<group>"; };
 		1C38EAF5225B0ED0000B35AB /* CalendarWeekdayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarWeekdayView.xib; sourceTree = "<group>"; };
+		1C38EAF7225B58C7000B35AB /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		1C499257224A2B650088C699 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		1CD04A5222363F08000AAEB5 /* CanlendarSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanlendarSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD04A5522363F08000AAEB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				1C38EAC8224B72C6000B35AB /* MonthViewController.swift */,
 				1C38EACA224B72F1000B35AB /* Calendar.storyboard */,
 				1C38EAEF22575DFF000B35AB /* TestNavigationController.swift */,
+				1C38EAF7225B58C7000B35AB /* LaunchViewController.swift */,
 			);
 			path = CalendarComponenet;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				1CD04A5E22363F08000AAEB5 /* CanlendarSample.xcdatamodeld in Sources */,
 				1C38EAEA2256F3EC000B35AB /* UIColorExtension.swift in Sources */,
 				1C38EAD1225358D3000B35AB /* PopCollectionTransition.swift in Sources */,
+				1C38EAF8225B58C7000B35AB /* LaunchViewController.swift in Sources */,
 				1C38EAC9224B72C6000B35AB /* MonthViewController.swift in Sources */,
 				1C38EAE12255E034000B35AB /* MonthInfo.swift in Sources */,
 				1C38EAC7224B72AB000B35AB /* YearViewController.swift in Sources */,
@@ -428,7 +432,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rutinfc.ios.CanlendarSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -447,7 +451,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rutinfc.ios.CanlendarSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

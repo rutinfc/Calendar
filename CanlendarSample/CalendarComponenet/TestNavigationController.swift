@@ -56,24 +56,14 @@ class TestNavigationBar: UINavigationBar {
 
 class TestNavigationController: UINavigationController {
 
-    init() {
-        super.init(navigationBarClass: TestNavigationBar.self, toolbarClass: nil)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    override init(rootViewController: UIViewController) {
-        super.init(navigationBarClass: TestNavigationBar.self, toolbarClass: nil)
-        
-        self.viewControllers = [rootViewController]
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        
-        super.init(coder: aDecoder)
-        
-//        fatalError("init(coder:) has not been implemented")
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        get {
+            return .lightContent
+        }
     }
 }

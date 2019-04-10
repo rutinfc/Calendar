@@ -49,6 +49,7 @@ class CalendarMonthLargeCell: UICollectionViewCell {
         large.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         large.style = .leftTop
         large.monthDayView.fontColor = UIColor.rgb(hexValue: 0x222222, alpha: 0.7)
+        large.monthDayView.enableSelect = true
         large.backgroundColor = UIColor.white
         self.monthLargeView = large
     }

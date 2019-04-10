@@ -11,21 +11,81 @@ import UIKit
 class CalendarMonthDayView: UIView {
 
     fileprivate let paragraphStyle = NSMutableParagraphStyle()
-    var fontColor = UIColor.black
-    var sundayColor = UIColor.rgb(hexValue: 0xDF4407, alpha: 0.7)
-    var saturdayColor = UIColor.rgb(hexValue: 0x4890F2, alpha: 0.7)
     
+    fileprivate var sundayColor = UIColor.rgb(hexValue: 0xDF4407, alpha: 0.7)
+    fileprivate var saturdayColor = UIColor.rgb(hexValue: 0x4890F2, alpha: 0.7)
+    fileprivate var dayRects = [CGRect]()
+    fileprivate var gesture : UITapGestureRecognizer?
+    
+//    fileprivate let notificationName = NSNotification.Name.init("SelectedMonthDayInfo")
+    fileprivate var notificationObserver : Any?
+    
+    var enableSelect = false {
+        didSet {
+            self.gesture?.isEnabled = self.enableSelect
+        }
+    }
+    var fontColor = UIColor.black
     var monthInfo : MonthInfo? {
         didSet {
             self.setNeedsDisplay()
         }
     }
+    var selectedDayInfo : DayInfo?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.paragraphStyle.alignment = .center
         
-
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        gesture.isEnabled = false
+        self.addGestureRecognizer(gesture)
+        
+        self.gesture = gesture
+        
+        self.notificationObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.init("SelectedMonthDayInfo"), object: nil, queue: nil) { (notification) in
+            
+            if self.selectedDayInfo != nil {
+                self.selectedDayInfo = nil
+                self.setNeedsDisplay()
+            }
+        }
+    }
+    
+    deinit {
+        self.notificationObserver = nil
+    }
+    
+    @objc func onTap(_ sender:UIGestureRecognizer) {
+        
+        guard let days = self.monthInfo?.days else {
+            return
+        }
+        
+        if self.enableSelect == false {
+            return
+        }
+        
+        switch sender.state {
+        
+        case .cancelled, .ended:
+            
+            self.selectedDayInfo = nil
+            NotificationCenter.default.post(name:NSNotification.Name.init("SelectedMonthDayInfo"), object: nil)
+            
+            let point = sender.location(in: self)
+            
+            for index in self.dayRects.enumerated() {
+                
+                if index.element.contains(point), days.count > index.offset {
+                    self.selectedDayInfo = days[index.offset]
+                    self.setNeedsDisplay()
+                }
+            }
+            
+        default:
+            break
+        }
     }
     
     override func draw(_ rect: CGRect) {
@@ -34,6 +94,8 @@ class CalendarMonthDayView: UIView {
         guard let context = UIGraphicsGetCurrentContext(), let monthInfo = self.monthInfo else {
             return
         }
+        
+        self.dayRects.removeAll()
         
         context.saveGState()
         
@@ -56,23 +118,27 @@ class CalendarMonthDayView: UIView {
                 fontSize = 20
             }
             
-//            let halfSize = min(subRect.width, subRect.height) / 1.25
-            let halfSize = fontSize * 1.5
+            let halfSize = fontSize * 1.7
             var circleRect = CGRect.zero
             circleRect.size = CGSize(width: halfSize, height: halfSize)
             circleRect.origin.x = (subRect.maxX - halfSize)
             circleRect.origin.y = (subRect.minY)
             
-            if dayInfo.isToday {
-                
-                context.setFillColor(UIColor.rgb(hexValue: 0xcccccc, alpha: 0.6).cgColor)
+            if dayInfo == self.selectedDayInfo {
+                context.setFillColor(UIColor.rgb(hexValue: 0x348EF8, alpha: 0.6).cgColor)
                 context.fillEllipse(in: circleRect)
+            } else {
+                if dayInfo.isToday {
+                    context.setFillColor(UIColor.rgb(hexValue: 0xcccccc, alpha: 0.6).cgColor)
+                    context.fillEllipse(in: circleRect)
+                }
             }
             
-            circleRect.origin.y += (halfSize / 15)
+            circleRect.origin.y += (halfSize / 7)
             
             self.drawDayText(dayInfo:dayInfo, context:context, rect:circleRect, fontSize:fontSize)
             
+            self.dayRects.append(subRect)
 //            context.setStrokeColor(UIColor.green.cgColor)
 //            context.stroke(subRect)
         }

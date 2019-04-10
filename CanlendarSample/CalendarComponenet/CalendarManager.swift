@@ -68,7 +68,7 @@ class CalendarManager {
     
     func indexOfCurrentYear() -> Int {
         
-        guard let index = self.years.index(of:self.currentYear) else {
+        guard let index = self.years.firstIndex(of:self.currentYear) else {
             return 0
         }
         
